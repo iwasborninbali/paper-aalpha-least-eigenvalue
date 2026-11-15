@@ -1,0 +1,406 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Aa}{A_{\alpha}}
+\newcommand{\lam}{\lambda_{\min}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ee}{\operatorname{ed}}
+
+\title[Minimum least eigenvalue of $A_\alpha(G)$]{The minimum least eigenvalue of $A_\alpha(G)$ for $0<\alpha<1/2$}
+\author{Aleksei Kudriashov}
+\address{Athanor lab, Bali, Indonesia}
+\thanks{ORCID: 0009-0006-8885-5338. Evidence and computer-readable certificates: \url{https://github.com/iwasborninbali/paper-aalpha-least-eigenvalue}; archive DOI \href{https://doi.org/10.5281/zenodo.24239158}{10.5281/zenodo.24239158}.}
+\subjclass[2020]{05C50, 15A18, 05C35}
+\keywords{$A_\alpha$-matrix, least eigenvalue, complete bipartite graph, spectral extremal problem, stability, exact certificate}
+
+\begin{document}
+\begin{abstract}
+For a simple graph $G$ of order $n$, let $A_\alpha(G)=\alpha D(G)+(1-\alpha)A(G)$, with $0<\alpha<1/2$. We determine the minimum of its least eigenvalue over all graphs of order $n\ge2$: writing $p=\lfloor n/2\rfloor$ and $q=\lceil n/2\rceil$, the minimum is
+$\bigl(\alpha n-\sqrt{\alpha^2n^2+4(1-2\alpha)pq}\bigr)/2$, attained precisely by $K_{p,q}$ up to isomorphism. This addresses Problem~30 of Nikiforov (2017). For even $n$, the statement is a direct consequence of published adjacency extremality and the complete-bipartite spectrum; for odd $n$, that deduction is not sharp. We give a uniform proof by sign-pattern deletion and strict Perron comparison. A nonnegative ground-state deficit identity yields a quantitative edit-distance stability estimate. We give exact rational certificates for the second distinct minimum at four parameter values through order seven and at smaller parameters through order nine. The latter show that the odd-order runner-up changes with the parameter, correcting an earlier conjecture. Equitable quotients give an algebraic equation for the candidate crossing; we state a revised two-branch conjecture and distinguish exact certificates from numerical scans. We distinguish mathematical proofs, exact computations, and floating-point evidence, and make no claim of established publication priority beyond a bounded literature search.
+\end{abstract}
+\maketitle
+
+\section{Setting and prior work}
+All graphs are finite, simple, undirected, and have the prescribed vertex set size; isolated vertices are permitted. Write $A(G)$ for the adjacency matrix, $D(G)$ for the diagonal degree matrix, and $Q(G)=D(G)+A(G)$. For $0<\alpha<1/2$, put
+\begin{equation}\label{eq:params}
+ \beta=1-\alpha,\qquad c=1-2\alpha=\beta-\alpha>0,\qquad
+ \Aa(G)=\alpha D(G)+\beta A(G).
+\end{equation}
+The least eigenvalue of $\Aa(G)$ is denoted $\lam(G)$, with the dependence on $\alpha$ understood. For nonnegative integers $r+s=n$, define
+\begin{align}\label{eq:f}
+ f_\alpha(r,s)&=\frac{\alpha n-\sqrt{\alpha^2n^2+4crs}}2,\qquad
+ p=\lfloor n/2\rfloor,\quad q=\lceil n/2\rceil,\notag\\
+ F_n(\alpha)&=f_\alpha(p,q).
+\end{align}
+For two graphs on $n$ vertices, $\ee(G,H)$ denotes the minimum, over vertex bijections, of the size of the symmetric difference of their edge sets.
+
+Nikiforov introduced $A_\alpha$ in \cite{Nikiforov2017} and posed the global least-eigenvalue minimization as \emph{Problem~30} (journal p.~102). His \emph{Proposition~38} gives the spectrum of $K_{r,s}$, including \eqref{eq:f}; his \emph{Theorem~25} concerns the \emph{largest} $A_\alpha$-eigenvalue on bipartite graphs and is not a proof of the present global minimum. The sharp adjacency least-eigenvalue bound, with its equality case, is recalled in Liu--Das--Shu \cite[Lemma~2.5]{LiuDasShu2020}; see also Constantine \cite{Constantine1985} and the discussion preceding Problem~30 in \cite{Nikiforov2017}. Other relevant, but distinct, results are the $\alpha>1/2$ bipartite least-eigenvalue comparison of Lin--Xue--Shu \cite[Theorem~3.3]{LinXueShu2018}, the degree bound for bipartite graphs of Wang--Wong--Tian \cite[Theorem~1.3]{WangWongTian2020}, and work on least eigenvalues in the complementary parameter range by Liu--Das--Sun--Shu \cite{LiuDasSunShu2020}. Bell--Cvetkovi\'c--Rowlinson--Simi\'c \cite{BellEtAlI,BellEtAlII} treat the adjacency least-eigenvalue problem with both order and edge count fixed; that is different from the optimization considered here. Yu and Fan \cite{YuFan2012} announced in their abstract a determination of the second minimum of the \emph{adjacency} least eigenvalue at fixed order. Their 2012 full text was not accessible in either priority audit; we therefore do not attribute a particular parity formula or theorem number to it.
+
+Here is precisely why even order follows from already published ingredients, and why this does not settle odd order. Since
+\begin{equation}\label{eq:Qdecomp}
+ \Aa(G)=cA(G)+\alpha Q(G),\qquad
+ x^TQ(G)x=\sum_{uv\in E(G)}(x_u+x_v)^2\ge0,
+\end{equation}
+Rayleigh's principle and the sharp adjacency bound give
+\begin{equation}\label{eq:oldbound}
+ \lam(G)\ge c\lambda_{\min}(A(G))\ge-c\sqrt{pq}.
+\end{equation}
+If $n=2p$, the signed constant vector on the two parts of $K_{p,p}$ is both a $Q$-nullvector and an adjacency eigenvector of eigenvalue $-p$. Thus $\lam(K_{p,p})=-cp$; the cited adjacency equality case gives uniqueness. If $n=2p+1$, equality in both inequalities of \eqref{eq:oldbound} would require a common least adjacency eigenvector and $Q$-nullvector. On $K_{p,p+1}$, the $Q$-nullvectors are constant with equal absolute value on both classes, whereas the adjacency least eigenvector has unequal part magnitudes. Thus the right side of \eqref{eq:oldbound} is strictly below $\lam(K_{p,p+1})$ for $\alpha>0$: this published-ingredient argument alone is \emph{not tight} in odd order.
+
+The proof below applies to all real $0<\alpha<1/2$ and every order. We did not find the odd-order statement published (two independent bounded audits and the author's search, dated 2026-11-15); this is not a claim of first publication or novelty. The detailed scope and access gaps are recorded in \texttt{PRIOR-ART.md}.
+
+\section{The global minimum and uniqueness}
+We first prove the strict fixed-bipartition step, including disconnected subgraphs.
+
+\begin{lemma}[Strict completion of a bipartition]\label{lem:completion}
+Let $r,s\ge1$ with $r+s=n$, and let $H$ be any spanning bipartite subgraph of the complete bipartite graph $K_{r,s}$ on specified nonempty parts. Then
+\[
+ \lam(H)\ge f_\alpha(r,s),
+\]
+with equality if and only if $H=K_{r,s}$.
+\end{lemma}
+\begin{proof}
+Let $S$ be the diagonal matrix taking values $1$ and $-1$ on the two parts, and put $B(J)=\beta A(J)-\alpha D(J)$. Since $S A(H)S=-A(H)$ while $S D(H)S=D(H)$, we have $S\Aa(H)S=-B(H)$ and hence $\lam(H)=-\lambda_{\max}(B(H))$.
+
+For $K=K_{r,s}$, $B(K)$ preserves vectors constant on the two parts and has quotient
+\[
+ \begin{pmatrix}-\alpha s&\beta s\\ \beta r&-\alpha r\end{pmatrix}.
+\]
+Its characteristic equation is $t^2+\alpha nt-crs=0$. Its positive root
+\begin{equation}\label{eq:mu}
+ \mu=\frac{\sqrt{\alpha^2n^2+4crs}-\alpha n}{2}>0
+\end{equation}
+corresponds to a vector $z$ taking strictly positive values $u,v$ on the two parts. Indeed, the equations $(\mu+\alpha s)u=\beta sv$ and $(\mu+\alpha r)v=\beta ru$ show positivity. In particular,
+\begin{equation}\label{eq:cost}
+ \beta v-\alpha u=\frac{\mu u}{s}>0,
+ \qquad \beta u-\alpha v=\frac{\mu v}{r}>0.
+\end{equation}
+All remaining eigenvalues of $B(K)$ are $-\alpha s$ (multiplicity $r-1$) and $-\alpha r$ (multiplicity $s-1$). The other quotient root is negative. Thus $\lambda_{\max}(B(K))=\mu$ and $\lam(K)= -\mu=f_\alpha(r,s)$.
+
+For each vertex $i$, the contribution of every $H$-edge incident with $i$ in $(B(H)z)_i$ is the appropriate strictly positive quantity in \eqref{eq:cost}. Since $H\subseteq K$, it follows coordinatewise that $B(H)z\le B(K)z=\mu z$, strictly at each vertex missing a cross-edge. Choose $a=\alpha(n-1)$; $B(H)+aI$ is symmetric and entrywise nonnegative because every degree is at most $n-1$. Its spectral radius is its largest eigenvalue, and the Perron theorem on a component attaining this largest eigenvalue provides a nonnegative eigenvector $y\ne0$ of $B(H)$ for $\lambda_{\max}(B(H))$. Therefore
+\[
+ (\mu-\lambda_{\max}(B(H)))y^Tz
+ =y^T(\mu z-B(H)z)\ge0.
+\]
+Because $z>0$ and $y\ge0$ is nonzero, $y^Tz>0$. If equality held while $H\ne K$, take a connected component of $H$ on which $y$ is positive and whose top eigenvalue is $\lambda_{\max}(B(H))$; Perron irreducibility makes $y$ positive at every vertex of that component. Some vertex of that component must lack a cross-edge to the full opposite part: otherwise the component would contain all vertices of both nonempty parts and hence $H=K$. At such a vertex the preceding coordinatewise comparison is strict, so $y^T(\mu z-B(H)z)>0$, a contradiction. Consequently $\lambda_{\max}(B(H))<\mu$ for every proper subgraph, establishing the assertion.
+\end{proof}
+
+\begin{theorem}[Nikiforov's Problem~30]\label{thm:main}
+For every integer $n\ge2$ and every real $0<\alpha<1/2$,
+\begin{equation}\label{eq:minimum}
+ \min_{|V(G)|=n}\lam(G)=F_n(\alpha)
+ =\frac{\alpha n-\sqrt{\alpha^2n^2+4(1-2\alpha)\lfloor n/2\rfloor\lceil n/2\rceil}}2.
+\end{equation}
+Up to isomorphism, $K_{p,q}$ is the unique attaining graph. For $n=1$ the sole graph is edgeless and the minimum is $0$.
+\end{theorem}
+\begin{proof}
+For an arbitrary $G$ and any real vector $x$, each edge $ij$ contributes
+\begin{equation}\label{eq:edgeform}
+ \alpha(x_i^2+x_j^2)+2\beta x_ix_j
+\end{equation}
+to $x^T\Aa(G)x$. Take a unit least-eigenvalue eigenvector $x$ and delete all edges for which $x_ix_j\ge0$, including all edges meeting a zero coordinate. Each deleted contribution is nonnegative. The remaining graph $H$ has edges only between positive and negative entries of $x$, hence is bipartite; zero-coordinate vertices may be assigned to either side. By the Rayleigh minimum principle,
+\begin{equation}\label{eq:deletion}
+ \lam(H)\le x^T\Aa(H)x\le x^T\Aa(G)x=\lam(G).
+\end{equation}
+If either side of this bipartition is empty, $H$ is edgeless and $\lam(G)\ge0$, already greater than $F_n(\alpha)<0$ because $pq>0$. Otherwise let the sides have sizes $r,s\ge1$. Lemma~\ref{lem:completion} and \eqref{eq:deletion} give
+\[
+ \lam(G)\ge\lam(H)\ge f_\alpha(r,s)\ge F_n(\alpha).
+\]
+The last inequality holds because $r+s=n$, $rs\le pq$, and $c>0$; equality in $rs\le pq$ occurs exactly for $\{r,s\}=\{p,q\}$. The graph $K_{p,q}$ has the claimed least eigenvalue by Lemma~\ref{lem:completion}.
+
+Suppose equality holds for $G$. Then both parts are nonempty, $\{r,s\}=\{p,q\}$, and strictness in Lemma~\ref{lem:completion} forces $H=K_{p,q}$ on those parts. Equality in the first Rayleigh inequality in \eqref{eq:deletion} makes $x$ a least eigenvector of $\Aa(H)$. This eigenvalue is simple: its negative quotient root is strictly below the other quotient root and the nonnegative eigenvalues $\alpha r,\alpha s$ on vectors summing to zero within a part. The corresponding eigenvector is constant, nonzero, and of opposite signs on the two parts (equivalently, it is $Sz$ from the preceding lemma). Therefore $x$ has no zero coordinates. Every edge removed from $G$ would have two endpoints of the same nonzero sign and by \eqref{eq:edgeform} would have \emph{strictly} positive contribution. That contradicts equality in the second Rayleigh inequality of \eqref{eq:deletion}. Thus no edge was removed: $G=H=K_{p,q}$.
+\end{proof}
+
+\begin{corollary}\label{cor:partition}
+If $H$ is bipartite with a specified nonempty bipartition of sizes $r,s$, then $f_\alpha(r,s)$ is the unique minimum of $\lam$ over all its spanning subgraphs, attained only by $K_{r,s}$. The assertion permits isolated vertices.
+\end{corollary}
+\begin{proof}
+It is exactly Lemma~\ref{lem:completion}; no connectedness hypothesis was used.
+\end{proof}
+
+\section{A nonnegative deficit and quantitative stability}
+The following ground-state calculation retains the penalties for missing cross-edges and for edges within sign classes. It is useful to state the identity independently.
+
+\begin{lemma}[Ground-state deficit identity]\label{lem:identity}
+Fix nonempty vertex classes $P,Q$ of sizes $r,s$, put $K=K_{r,s}$ and $B(J)=\beta A(J)-\alpha D(J)$, and choose a positive unit vector $z$ constant on each class with $B(K)z=\mu z$, where $\mu=-f_\alpha(r,s)>0$. Suppose $x$ is a unit least eigenvector of a graph $G$ and its signs agree with $P,Q$ (zeros assigned arbitrarily). Write $y_i=|x_i|$, $w_i=y_i/z_i$, and $H=\{ij\in E(G):x_ix_j<0\}$. Let $d_i$ be the size of the opposite class in $K$, $m_i=d_i-d_H(i)$, and let
+\[
+ J=\sum_{ij\in E(G)\setminus E(H)}\bigl(\alpha(y_i^2+y_j^2)+2\beta y_iy_j\bigr).
+\]
+Then
+\begin{equation}\label{eq:deficit}
+ \lam(G)-f_\alpha(r,s)=
+ \beta\sum_{ij\in E(H)}z_iz_j(w_i-w_j)^2
+ +\mu\sum_i\frac{m_i}{d_i}y_i^2+J.
+\end{equation}
+Every term on the right is nonnegative, including when $x$ has zero coordinates.
+\end{lemma}
+\begin{proof}
+The eigenvector equation at vertex $i$ of $K$ says that for each vertex $j$ opposite $i$,
+\begin{equation}\label{eq:peredge}
+ \beta z_j-\alpha z_i=\mu z_i/d_i.
+\end{equation}
+For any edge $ij\in E(H)$, expanding its square gives
+\[
+ \beta z_iz_j(w_i-w_j)^2
+ =\beta(y_i^2z_j/z_i+y_j^2z_i/z_j-2y_iy_j).
+\]
+By \eqref{eq:peredge}, $\beta z_j/z_i=\alpha+\mu/d_i$ and the analogous equation holds at $j$. Summing these identities over $E(H)$ yields
+\[
+ \beta\sum_{ij\in E(H)}z_iz_j(w_i-w_j)^2
+ =\mu\sum_i\frac{d_H(i)}{d_i}y_i^2-y^TB(H)y.
+\]
+Adding $\mu\sum_i(m_i/d_i)y_i^2$ changes the first term to $\mu\|y\|^2=\mu$. Every $H$-edge contributes $\alpha(y_i^2+y_j^2)-2\beta y_iy_j$ to $x^T\Aa(G)x$, namely its contribution to $-y^TB(H)y$; all other $G$-edges contribute exactly $J$. Thus $\lam(G)=-y^TB(H)y+J$ and $f_\alpha(r,s)=-\mu$, proving \eqref{eq:deficit}. Assigning zeros does not affect any step, because an edge meeting a zero coordinate is absent from $H$ and accounted for in $J$ and, where applicable, in $m_i$.
+\end{proof}
+
+\begin{theorem}[Quantitative stability]\label{thm:stability}
+For $n\ge2$, $0<\alpha<1/2$, and $\beta,c$ as in \eqref{eq:params}, define
+\begin{align}\label{eq:constants}
+ \mu_*&=\frac{2c(n-1)}{n},&
+ C_*&=1+\frac{\beta\sqrt{n-1}(n-1)}{\mu_*},\\
+ L_*&=n^2(n-1)^2\left(\frac1\alpha+
+ \frac{(n-1)(1+2C_*)}{\mu_*}\right).\nonumber
+\end{align}
+If $0\le\varepsilon<-F_n(\alpha)$ and
+$\lam(G)\le F_n(\alpha)+\varepsilon$, then
+\begin{equation}\label{eq:stable}
+ \ee(G,K_{p,q})\le
+ n\sqrt{\frac{\beta n\varepsilon}{c}}+L_*\varepsilon.
+\end{equation}
+For $\varepsilon\ge-F_n(\alpha)$, the unconditional bound $\ee(G,K_{p,q})\le\binom n2$ applies. In particular, if the right side of \eqref{eq:stable} is less than $1$, then $G\cong K_{p,q}$.
+\end{theorem}
+\begin{proof}
+Let $x$ be a unit least eigenvector of $G$. Since $\lam(G)<0$, its coordinates have both signs: otherwise every edge term in \eqref{eq:edgeform} would be nonnegative. Make two nonempty classes $P,Q$ by their signs, assigning zeros arbitrarily, and use the notation $r,s,K,H,y,z,\mu$ of Lemma~\ref{lem:identity}. Put
+\[
+ \Delta=\lam(G)-f_\alpha(r,s),\quad
+ M=|E(K)\setminus E(H)|,
+ \quad I=|E(G)\cap\bigl(\tbinom P2\cup\tbinom Q2\bigr)|.
+\]
+Theorem~\ref{thm:main} and \eqref{eq:deficit} imply $0\le\Delta\le\varepsilon$, since $f_\alpha(r,s)\ge F_n(\alpha)$.
+
+We first obtain bounds on the coordinates of $z$. Relabel the classes so $r\le s$, and write $u,v$ for the constant values of $z$ on $P,Q$. The ratio $t=u/v$ satisfies, by eliminating $\mu$ from the quotient eigenvector equations,
+\[
+ \beta rt^2+\alpha(s-r)t-\beta s=0.
+\]
+The polynomial is nonpositive at $t=1$ (it equals $-c(s-r)$) and nonnegative at $t=\sqrt{s/r}$ (it equals $\alpha(s-r)\sqrt{s/r}$). Since it is strictly increasing for $t>0$, $1\le t\le\sqrt{s/r}\le S:=\sqrt{n-1}$. The unit normalization $ru^2+sv^2=1$ implies, setting $z_{\min}=\min_i z_i=v$,
+\begin{equation}\label{eq:zmin}
+ z_{\min}^2\ge\frac1{n(n-1)},
+ \qquad h:=\langle y,z\rangle\ge z_{\min}\|y\|_1\ge z_{\min}.
+\end{equation}
+The second inequality uses $y\ge0$ and $\|y\|_2=1$.
+
+Set $v_0=y-hz$; then $v_0\perp z$. Apart from its positive largest eigenvalue $\mu$, the eigenvalues of $B(K)$ are the negative second quotient root and $-\alpha r,-\alpha s$, so they are all nonpositive. Consequently the complete-graph ground-state energy satisfies
+\begin{equation}\label{eq:energyK}
+ E_K:=\beta\sum_{ij\in E(K)}z_iz_j(w_i-w_j)^2
+ =\mu-y^TB(K)y\ge\mu\|v_0\|^2.
+\end{equation}
+For an omitted cross-edge $ij$, positivity and the ratio bound give
+\[
+ \beta z_iz_j(w_i-w_j)^2
+ =\beta\left(\frac{z_j}{z_i}y_i^2+\frac{z_i}{z_j}y_j^2-2y_iy_j\right)
+ \le\beta S(y_i^2+y_j^2).
+\]
+Write $D_{\max}=\max(r,s)\le n-1$. The middle term of \eqref{eq:deficit} gives
+\[\sum_i m_i y_i^2\le D_{\max}\Delta/\mu.\]
+Therefore the missing-edge contribution to \eqref{eq:energyK} is at most
+$\beta S D_{\max}\Delta/\mu$. The sum over $H$ is at most $\Delta$. Hence
+\begin{equation}\label{eq:v0estimate}
+ \mu\|v_0\|^2\le E_K\le
+ \left(1+\frac{\beta SD_{\max}}\mu\right)\Delta.
+\end{equation}
+The root equation gives
+\[
+ \mu=\frac{2crs}{\sqrt{\alpha^2n^2+4crs}+\alpha n}.
+\]
+Because $rs\ge n-1$ and $4rs\le n^2$, the denominator is at most
+$n\sqrt{\alpha^2+c}+\alpha n=(\beta+\alpha)n=n$. Thus $\mu\ge\mu_*$ and \eqref{eq:v0estimate} yields
+\begin{equation}\label{eq:v0final}
+ \|v_0\|^2\le\frac{C_*}{\mu_*}\Delta.
+\end{equation}
+
+For each $i$, $y_i=hz_i+(v_0)_i$ and $(a+b)^2\ge a^2/2-b^2$, so
+$y_i^2\ge h^2z_i^2/2-(v_0)_i^2$. Since $\sum_i m_i=2M$ and $m_i\le D_{\max}$,
+\begin{equation}\label{eq:missingbound}
+ \sum_i m_i y_i^2\ge h^2z_{\min}^2 M-D_{\max}\|v_0\|^2.
+\end{equation}
+Combining \eqref{eq:missingbound} with the middle term of \eqref{eq:deficit}, \eqref{eq:v0final}, and $h^2\ge z_{\min}^2$ gives
+\begin{equation}\label{eq:Mestimate}
+ M\le z_{\min}^{-4}\frac{D_{\max}(1+C_*)}{\mu_*}\Delta.
+\end{equation}
+Each of the $I$ edges internal to a class is omitted from $H$ and contributes at least $\alpha(y_i^2+y_j^2)$ to $J$. The same squared-coordinate inequality, and the fact that the internal degree of every vertex is at most $n-1$, give
+\[
+ \sum_{ij\text{ internal}}(y_i^2+y_j^2)
+ \ge h^2z_{\min}^2 I-(n-1)\|v_0\|^2.
+\]
+Because $J\le\Delta$, it follows from \eqref{eq:v0final} that
+\begin{equation}\label{eq:Iestimate}
+ I\le z_{\min}^{-4}\left(\frac1\alpha+
+ \frac{(n-1)C_*}{\mu_*}\right)\Delta.
+\end{equation}
+Using $z_{\min}^{-4}\le n^2(n-1)^2$ and $D_{\max}\le n-1$ in \eqref{eq:Mestimate}--\eqref{eq:Iestimate} gives
+\begin{equation}\label{eq:edKrs}
+ \ee(G,K_{r,s})\le M+I\le L_*\Delta\le L_*\varepsilon.
+\end{equation}
+Indeed, an actual $G$-cross-edge absent from $K$ is impossible, and a missing $G$-cross-edge is among those absent from $H$. Thus $M+I$ is an upper bound on the additions and deletions to obtain $K$ on the current vertex classes.
+
+Finally, direct rationalization of \eqref{eq:f} gives
+\begin{equation}\label{eq:imbalance}
+ f_\alpha(r,s)-F_n(\alpha)
+ =\frac{2c(pq-rs)}{\sqrt{\alpha^2n^2+4cpq}+\sqrt{\alpha^2n^2+4crs}}
+ \ge\frac{c(pq-rs)}{\beta n},
+\end{equation}
+because each radical is at most $\beta n$. With $k=\min\{|r-p|,|r-q|\}$, one checks by writing $r=p\pm k$ that $pq-rs=k^2$ for even $n$ and $pq-rs=k(k+1)$ for odd $n$. Therefore
+$k\le\sqrt{\beta n\varepsilon/c}$. Moving $k$ vertices from the larger part to the smaller changes at most $n$ adjacencies per moved vertex, so $\ee(K_{r,s},K_{p,q})\le nk$. The triangle inequality for edit distance and \eqref{eq:edKrs} prove \eqref{eq:stable}. An arbitrary pair of simple graphs on $n$ vertices differs in at most $\binom n2$ edges, giving the unconditional bound. Since edit distance is an integer, a bound below $1$ forces it to be zero.
+\end{proof}
+
+\begin{corollary}[Stability for designated bipartitions]\label{cor:fixedstable}
+If $H\subseteq K_{r,s}$, $r,s\ge1$, and $\delta=\lam(H)-f_\alpha(r,s)$, then
+\[
+ |E(K_{r,s})\setminus E(H)|\le
+ n^2(n-1)^2\frac{(n-1)(1+C_*)}{\mu_*}\,\delta.
+\]
+\end{corollary}
+\begin{proof}
+Use the sign of a least eigenvector of $H$ chosen opposite on the fixed classes, which exists by conjugating $\Aa(H)$ to $-B(H)$ and using a nonnegative top eigenvector of $B(H)+\alpha(n-1)I$. Isolated zero coordinates can be allocated on their original sides. With this choice every $H$-edge meeting two nonzero entries has opposite signs, so the graph $H'$ selected in Lemma~\ref{lem:identity} is a subgraph of the designated $H$; consequently $|E(K)\setminus E(H)|\le|E(K)\setminus E(H')|=M$. The derivation \eqref{eq:Mestimate} uses only the deficit $\delta$ and the designated $K_{r,s}$, and its bounds apply even if zeros cause some edges to be omitted from $H'$. Substituting \eqref{eq:zmin} and $D_{\max}\le n-1$ gives the result.
+\end{proof}
+
+\section{The second distinct minimum: proved cases and finite evidence}
+For $n\ge2$, let $\sigma_n(\alpha)$ be the least $\lam(G)$ among graphs on $n$ vertices not isomorphic to $K_{p,q}$. Theorem~\ref{thm:main} shows that it is strictly greater than $F_n(\alpha)$; thus it is the second \emph{distinct} spectral value. Write $K_{p,q}^{+}$ for $K_{p,q}$ with one edge added \emph{inside its larger class} when $q=p+1$, and $K_{p,q}^{-}$ for $K_{p,q}$ with one cross-edge removed. The location of the added edge matters for odd order.
+
+\begin{proposition}\label{prop:smallsecond}
+For all $0<\alpha<1/2$, $\sigma_2(\alpha)=0$, uniquely at the empty graph, and $\sigma_3(\alpha)=2\alpha-1$, uniquely at $K_2\cup K_1$.
+\end{proposition}
+\begin{proof}
+For $n=2$ the two graphs are $K_2$ and the empty graph. Their least eigenvalues are $2\alpha-1<0$ and $0$, respectively. For $n=3$ there are exactly four isomorphism classes: $K_{1,2}$, $K_2\cup K_1$, $K_3$, and the empty graph. The first is the unique minimum by Theorem~\ref{thm:main}. The other three least eigenvalues are $2\alpha-1$, $3\alpha-1$, and $0$, respectively. Since $0<\alpha<1/2$, $2\alpha-1<3\alpha-1$ and $2\alpha-1<0$, as asserted.
+\end{proof}
+
+\begin{proposition}[Finite rational-grid certificate]\label{prop:finite}
+For each of the four parameters
+\[\alpha=\frac1{10},\quad\frac14,\quad\frac25,\quad\frac{49}{100},\]
+and each order in the table, the indicated graph is the unique runner-up up to isomorphism:
+\begin{center}
+\begin{tabular}{c|l|l}
+$n$&runner-up graph&least eigenvalue\\\hline
+$4$&$K_{1,3}$&$f_\alpha(1,3)$\\
+$5$&$K_{2,3}^{-}$&$\lam(K_{2,3}^{-})$\\
+$6$&$K_{2,4}$&$f_\alpha(2,4)$\\
+$7$&$K_{3,4}^{-}$&$\lam(K_{3,4}^{-})$
+\end{tabular}
+\end{center}
+This is an exact, finite \emph{four-point} classification, not a statement for all real $\alpha$.
+\end{proposition}
+\begin{proof}[Certificate and verification method]
+We specify the exact finite decision procedure and the archived output that certifies the claims. For each $n\in\{4,5,6,7\}$, use all simple-graph isomorphism representatives of order $n$ from \texttt{networkx.graph\_atlas\_g()}, respectively $11,34,156,1044$ graphs, and explicitly locate the balanced complete bipartite graph $K_{p,q}$ and the candidate $T$ of the table. At each rational parameter $a/b$ in lowest terms choose the rational separating cutoff $t=u/v$ recorded in \path{certificates/p30stability/atlas_exact.log}. For any graph $J$ define the integer symmetric matrix
+\[
+ M(J;a,b,u,v)=bv\bigl(A_{a/b}(J)-\tfrac uv I\bigr),
+\]
+whose diagonal entries are $av\,d_J(i)-bu$ and whose off-diagonal entries are $(b-a)v$ on edges, zero otherwise. The program \texttt{atlas\_exact.py} evaluates its determinant using fraction-free integer Bareiss elimination (with exact divisibility checks), and tests positive definiteness of $M(J)$ by the strict positivity of \emph{all} leading principal determinants (Sylvester's criterion).
+
+For both $K_{p,q}$ and $T$, the full integer determinant is negative at the recorded $t$, so each has a Rayleigh quotient below $t$ and thus least eigenvalue below $t$. For every other graph of the given order, \emph{all} leading principal determinants are positive, proving that its least eigenvalue is strictly above $t$. Hence only the two specified isomorphism classes have least eigenvalue below $t$. Theorem~\ref{thm:main} places $K_{p,q}$ uniquely first, so $T$ is uniquely second. The archived log records every cutoff, the number of other positive-definite matrices ($9,32,154,1042$, respectively), and zero failures for each of the four rational parameters. All spectral \emph{comparisons in this certificate} are exact integer operations. Floating-point eigenvalues were used only to propose the cutoffs, not to validate them. The graph-list completeness assumption is the standard NetworkX atlas inventory; a separately constructed VF2 enumeration through order seven agrees in class counts but tests eigenvalues numerically.
+\end{proof}
+
+\begin{proposition}[Small-$\alpha$ exact runner-up certificates]\label{prop:smallalpha}
+At the three parameter/order pairs in the following table, the unique runner-up is $K_{p,p+1}^{+}$, up to isomorphism:
+\begin{center}
+\begin{tabular}{c|c|c|r|c}
+$n$&$\alpha$&rational cutoff $t$&graph classes&classes below $t$\\\hline
+$5$&$1/20$&$-481/250$&$34$&$2$\\
+$7$&$1/20$&$-7261/2500$&$1044$&$2$\\
+$9$&$1/40$&$-20359/5000$&$274668$&$2$
+\end{tabular}
+\end{center}
+In every case exactly $K_{p,p+1}$ and $K_{p,p+1}^{+}$ have least eigenvalue strictly below $t$; every other graph has least eigenvalue strictly above $t$. These statements hold at the \emph{listed rational parameters}, not on entire parameter intervals.
+\end{proposition}
+\begin{proof}[Exact finite certificate]
+The guide's \texttt{runnerup\_exact.py} consumes the complete nauty \texttt{geng} version~2.9.3 graph6 catalogue of simple graphs of order $n$ (one representative per isomorphism class). For $\alpha=a/b$ and $t=u/v$ it builds, for every representative $J$, the integer matrix
+\[
+\begin{aligned}
+M(J)&=bv\bigl(A_{a/b}(J)-\tfrac uv I\bigr),\\
+M_{ii}&=av\,d_J(i)-bu,\qquad
+M_{ij}=(b-a)v\,\mathbf{1}_{ij\in E(J)}\quad(i\ne j).
+\end{aligned}
+\]
+It performs a fraction-free Bareiss elimination, checking exact divisibility at every update, and applies Sylvester's criterion to the leading principal minors. The respective catalogue sizes are $34,1044,274668$; the log \texttt{runnerup-exact.log} in \texttt{certificates/guide-checks/} records exactly two non-positive-definite instances for each run, with graph6 encodings and degree sequences identifying $K_{p,p+1}$ and $K_{p,p+1}^{+}$. Every other $M(J)$ is positive definite and consequently has $\lam(J)>t$.
+
+To verify \emph{strict} inequality for the two exceptional graphs without relying on failure of positive definiteness alone, calculate their equitable-quotient determinants (the quotients are displayed in Proposition~\ref{prop:quotients}). With $C_0=\bigl(\begin{smallmatrix}\alpha q&\beta q\\\beta p&\alpha p\end{smallmatrix}\bigr)$ for $K_{p,q}$ and $C_+$ as in \eqref{eq:plusquot}, direct rational arithmetic gives, in the order of the table,
+\[
+\begin{array}{c|cc}
+ n&\det(C_0-tI)&\det(C_+-tI)\\\hline
+5&-152153/125000&-138448/1953125\\
+7&-1053063/781250&-97674693/1953125000\\
+9&-9401811/6250000&-5465180649/31250000000
+\end{array}
+\]
+For $C_0$ its other eigenvalue is positive. The symmetrized $C_+$ is an arrowhead matrix whose principal block on its last two cells is diagonal and positive definite; by the Schur complement it has at most one nonpositive eigenvalue. Because $t<0$, the negative determinant of $C_+-tI$ therefore forces exactly one eigenvalue below $t$, and all others above $t$. Thus each displayed negative determinant shows that the corresponding least eigenvalue is \emph{strictly} less than $t$. By Theorem~\ref{thm:main}, $K_{p,p+1}$ is uniquely first; the only remaining graph below $t$ is therefore uniquely second. The graph-catalogue coverage is a property of the standard nauty \texttt{geng} inventory. Neither floating-point eigenvalues nor an unexecuted optional scan are used as proof.
+\end{proof}
+
+\begin{proposition}[Candidate quotients and algebraic crossing equation]\label{prop:quotients}
+Let $n=2p+1$ with $p\ge2$, $q=p+1$, and $\beta=1-\alpha$. The least eigenvalues of $K_{p,q}^{+}$ and $K_{p,q}^{-}$ are the smallest eigenvalues of the respective equitable quotients
+\begin{equation}\label{eq:plusquot}
+ C_+(\alpha)=
+ \begin{pmatrix}
+ \alpha q&2\beta&(q-2)\beta\\
+ p\beta&\alpha p+1&0\\
+ p\beta&0&\alpha p
+ \end{pmatrix},
+\end{equation}
+\begin{equation}\label{eq:minusquot}
+ C_-(\alpha)=
+ \begin{pmatrix}
+ \alpha(q-1)&0&0&(q-1)\beta\\
+ 0&\alpha q&\beta&(q-1)\beta\\
+ 0&(p-1)\beta&\alpha(p-1)&0\\
+ \beta&(p-1)\beta&0&\alpha p
+ \end{pmatrix}.
+\end{equation}
+Consequently, a coincidence of the \emph{least} eigenvalues of these two graphs at $\alpha\in(0,1/2)$ is characterized exactly by a real $t$ satisfying
+\begin{equation}\label{eq:crossover}
+\begin{aligned}
+\det(tI_3-C_+(\alpha))&=0,\qquad
+\det(tI_4-C_-(\alpha))=0,\\
+ t&=\lambda_{\min}(C_+)=\lambda_{\min}(C_-).
+\end{aligned}
+\end{equation}
+Eliminating $t$ by a resultant gives an algebraic equation for possible crossing parameters; the resultant alone can also detect coincidences of \emph{other} quotient eigenvalues and is not a proof of uniqueness of a least-eigenvalue crossing.
+\end{proposition}
+\begin{proof}
+For $K_{p,q}^{+}$ partition the vertices into the $p$ vertices in the smaller class, the two endpoints of the added edge, and the other $q-2$ vertices in the larger class. Degrees are, respectively, $q,p+1,p$. Reading the diagonal degree contribution and the numbers of neighbours in each cell gives \eqref{eq:plusquot}. The orthogonal complements to the cell-constant subspace have eigenvalues $\alpha q$ (multiplicity $p-1$), $\alpha p$ (multiplicity $q-3$, when nonzero), and $\delta=\alpha(p+1)-\beta=\alpha(p+2)-1$ (the antisymmetric vector on the two endpoints). The first two are nonnegative. To see that the quotient has an eigenvalue smaller than $\delta$, restrict the symmetric matrix $A_\alpha(K_{p,q}^{+})$ to the normalized indicators of the smaller class and of the two endpoints. Its $2\times2$ compression is
+\[
+ T=\begin{pmatrix}\alpha q&\beta\sqrt{2p}\\\beta\sqrt{2p}&\alpha p+1\end{pmatrix},
+ \quad \det(T-\delta I)=2\beta^2(1-p)<0.
+\]
+Thus $\lambda_{\min}(T)<\delta$, and the least eigenvalue on the cell-constant subspace is at most that value, by Rayleigh's principle. It is therefore the least eigenvalue of the entire graph.
+
+For $K_{p,q}^{-}$ take as cells the deficient vertex in the smaller class, its other $p-1$ vertices, the deficient vertex in the larger class, and its other $q-1$ vertices. The four degrees are $q-1,q,p-1,p$; their cross-neighbour counts yield \eqref{eq:minusquot}. All eigenvalues off the cell-constant subspace are $\alpha q$ (multiplicity $p-2$) or $\alpha p$ (multiplicity $q-2$), hence nonnegative. Since this graph is bipartite with at least one edge, conjugating $A_\alpha$ by its bipartition sign matrix yields $-B$, where $B=\beta A-\alpha D$ and $\mathbf1^TB\mathbf1=2(1-2\alpha)|E|>0$. Therefore its least eigenvalue is strictly negative and must belong to the quotient. Both quotients are restrictions of real symmetric matrices to invariant subspaces (in normalized cell indicators), so their eigenvalues are real. The simultaneous equations and least-root restriction in \eqref{eq:crossover} follow immediately.
+\end{proof}
+
+\begin{remark}[Independent checks and evidence status]\label{rem:evidence}
+The guide independently generated the complete nauty \texttt{geng} catalogues for orders $4$--$9$ and used NumPy's symmetric eigensolver at $\alpha=0.1,0.25,0.4,0.49$. In those $24$ order/parameter cases the unique runner-up was $K_{n/2-1,n/2+1}$ at even orders and $K_{p,q}^{-}$ at odd orders. At $\alpha=0$ the guide's exhaustive-catalogue \emph{floating-point} scan found $K_{p,q}^{+}$ uniquely second for $n=5,7,9$ and $K_{n/2-1,n/2+1}$ for $n=4,6,8$; small-positive-parameter scans at $\alpha=0.005,0.01,0.02,0.03,0.05,0.07,0.09$ show the odd-order switch and continued even-order pattern at the sampled points. These are numerical corroborations, distinct from the exact integer certificates in Propositions~\ref{prop:finite} and \ref{prop:smallalpha}. The logs \path{p30-second-alpha0.log}, \path{p30-second-small-alpha.log}, and \path{p30-second.log} are archived in \path{certificates/guide-checks/}.
+
+The candidate crossing points from numerical bisection of \eqref{eq:crossover} are $\alpha_5\approx0.07310372$, $\alpha_7\approx0.06013314$, $\alpha_9\approx0.04916085$, and $\alpha_{25}\approx0.01921649$; the observed $n\alpha_n$ values increase from $0.36552$ to $0.48041$. The intervening values for odd $n=11,13,\ldots,23$ are in \path{certificates/guide-checks/p30-threshold.log}. These figures are \emph{not} certified uniqueness of a crossing, nor an all-order runner-up classification or an asymptotic proof. Indeed the unfiltered resultant in \eqref{eq:crossover} may have extraneous roots from higher eigenvalue coincidences.
+
+For the global minimum, an entirely separate exact integer sweep uses all $1024$ \emph{labelled} graphs of order five and the $1044$ atlas classes of order seven at $14$ rational $\alpha$ values, proving $A_\alpha(G)-tI\succ0$ for every nonextremizer at a rational upper bound $t$ for $F_n(\alpha)$. The same directory contains $42$ integer radical-isolation checks for $n=5,7,9$. Its order-nine check covers $8662$ selected labelled graphs, \emph{not} the whole order-nine catalogue; the proof of Theorem~\ref{thm:main}, rather than that sample, covers all orders and all real parameters. The exact rational ground-state identity check in \path{certificates/p30stability/identity_check.log} is a corroborating algebraic test, not a formal proof. All source programs, logs, reports and SHA-256 manifests reside in the paper repository \cite{AthanorArchive} under \texttt{certificates/}. The background repository \href{https://github.com/iwasborninbali/athanor-aalpha-spectral}{background repository} contains the earlier audit, \texttt{priority/}, \texttt{verify/}, and the guide's independent checks.
+\end{remark}
+
+\begin{conjecture}[Two-branch runner-up pattern]\label{conj:second}
+For each even $n\ge4$ and every real $0<\alpha<1/2$, the unique runner-up is $K_{n/2-1,n/2+1}$. For each odd $n=2p+1\ge5$ there exists a number $\alpha_n\in(0,1/2)$ such that the unique runner-up is $K_{p,p+1}^{+}$ for $0<\alpha<\alpha_n$ and $K_{p,p+1}^{-}$ for $\alpha_n<\alpha<1/2$, with exactly these two runner-up isomorphism classes tied at $\alpha_n$. The number $\alpha_n$ is the unique least-eigenvalue crossing selected by \eqref{eq:crossover}. The asymptotic behaviour $\alpha_n\sim1/(2n)$ is suggested by numerical data and remains a separate question, not part of the proved assertions.
+\end{conjecture}
+
+\section{Open questions}
+It remains to prove or refute Conjecture~\ref{conj:second} uniformly in $n$ and $\alpha$. Even orders ask for a single runner-up throughout the interval. At odd orders one must establish the asserted two branches, prove the existence and uniqueness of their least-eigenvalue crossing, exclude all other competitors, and determine whether $\alpha_n\sim1/(2n)$. Proposition~\ref{prop:quotients} supplies an exact common-root equation but not a uniqueness theorem. The exact small-$\alpha$ certificates and the large-$\alpha$ four-point certificates prove opposite runner-up choices at $n=5,7$ (and give the small-$\alpha$ choice at $n=9$); by continuity the two candidates have at least one crossing at $n=5,7,9$, since at $\alpha=1/2$ the connected bipartite $K_{p,q}^{-}$ has least $A_{1/2}$-eigenvalue zero, while the connected nonbipartite $K_{p,q}^{+}$ has strictly positive least eigenvalue. This establishes neither uniqueness of that crossing nor the global classification in between. In comparing candidates one must not assume that edge addition monotonically decreases $\lam$: it changes the degree diagonal as well as the adjacency matrix.
+
+A second question is to replace the explicit but very large $L_*$ and square-root imbalance term in Theorem~\ref{thm:stability} by sharp or asymptotically sharp constants, perhaps with an exact converse relating spectral deficit to an optimal number of edits. A third problem asks for least-eigenvalue minimizers with both the order and the number of edges prescribed, particularly within connected graphs; sign-deletion does not preserve either edge count or connectivity, and the adjacency results of \cite{BellEtAlI,BellEtAlII}, including their published errata, are essential antecedents. Exact certificates for the runner-up throughout a continuous $\alpha$-interval and a formal machine-checked implementation of the analytical proof would also strengthen the evidence base. None of these questions is claimed to be unresolved in the absolute literature-priority sense; the search reported here is bounded.
+
+\section*{Acknowledgements and responsibility}
+The results were found and checked with AI assistance: ChatGPT research agents by OpenAI developed arguments and computational certificates in separate research threads, and Anthropic's Claude served as an orchestrator and verifier, including line-by-line review and independent computational checks. The author takes responsibility for the mathematical statements, proofs, citations and any errors in this article.
+
+\bibliographystyle{amsplain}
+\bibliography{refs}
+\end{document}
