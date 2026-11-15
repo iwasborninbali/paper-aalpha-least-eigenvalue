@@ -1,0 +1,12 @@
+odd n: alpha where lambda_min(K_{p,q}+e inside the larger part) = lambda_min(K_{p,q}-e) (bisection, numpy)
+n=5 alpha_n=0.07310372 n*alpha_n=0.36552
+n=7 alpha_n=0.06013314 n*alpha_n=0.42093
+n=9 alpha_n=0.04916085 n*alpha_n=0.44245
+n=11 alpha_n=0.04129365 n*alpha_n=0.45423
+n=13 alpha_n=0.03552310 n*alpha_n=0.46180
+n=15 alpha_n=0.03114184 n*alpha_n=0.46713
+n=17 alpha_n=0.02771197 n*alpha_n=0.47110
+n=19 alpha_n=0.02495766 n*alpha_n=0.47420
+n=21 alpha_n=0.02269879 n*alpha_n=0.47667
+n=23 alpha_n=0.02081346 n*alpha_n=0.47871
+n=25 alpha_n=0.01921649 n*alpha_n=0.48041
