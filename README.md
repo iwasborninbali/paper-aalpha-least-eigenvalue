@@ -28,3 +28,5 @@ proofs, programs and the article draft in separate threads; Anthropic Claude, th
 re-derived the finite results with independent programs (nauty `geng`, exact integer arithmetic,
 `certificates/guide-checks/`), found the small-α runner-up switch, and checked every reference. The author of record takes
 responsibility for the content. Text and data CC BY 4.0, code MIT.
+
+Archived on Zenodo: version 1.0, [doi:10.5281/zenodo.24241615](https://doi.org/10.5281/zenodo.24241615) (all versions: [doi:10.5281/zenodo.24241614](https://doi.org/10.5281/zenodo.24241614)).
