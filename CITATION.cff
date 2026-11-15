@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: >-
+  If you use the article or its certificates, please cite this research draft
+  and the associated archived evidence.
+title: The minimum least eigenvalue of A_alpha(G) for 0 < alpha < 1/2
+type: software
+authors:
+  - family-names: Kudriashov
+    given-names: Aleksei
+    affiliation: Athanor lab, Bali, Indonesia
+    orcid: https://orcid.org/0009-0006-8885-5338
+repository-code: https://github.com/iwasborninbali/paper-aalpha-least-eigenvalue
+url: https://github.com/iwasborninbali/paper-aalpha-least-eigenvalue
+date-released: 2026-11-15
+license: CC-BY-4.0
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.24239158
+    description: Archived research evidence cited by the repository
+preferred-citation:
+  type: generic
+  authors:
+    - family-names: Kudriashov
+      given-names: Aleksei
+      affiliation: Athanor lab, Bali, Indonesia
+      orcid: https://orcid.org/0009-0006-8885-5338
+  title: The minimum least eigenvalue of A_alpha(G) for 0 < alpha < 1/2
+  year: 2026
+  url: https://github.com/iwasborninbali/paper-aalpha-least-eigenvalue
