@@ -1,0 +1,6 @@
+2026-11-15 rational ground-state identity checker (no third-party libraries)
+n=4 r=2 s=2 alpha=1/4 mu=1 masks=64 rational_identity=PASS
+n=5 r=2 s=3 alpha=1/11 mu=2 masks=1024 rational_identity=PASS
+n=6 r=3 s=3 alpha=2/5 mu=3/5 masks=2500 rational_identity=PASS
+n=7 r=3 s=4 alpha=1/15 mu=3 masks=2500 rational_identity=PASS
+PASS: exact identity checks with both equal and unequal bipartitions

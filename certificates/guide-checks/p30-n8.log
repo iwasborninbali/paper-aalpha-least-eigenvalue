@@ -1,0 +1,8 @@
+n=8 graphs=12346 alpha=0.0100 F=-3.920000000 min=-3.920000000 attaining=1 kpq_flag=[True] gap_to_second=0.125733 violations=0
+n=8 graphs=12346 alpha=0.1000 F=-3.200000000 min=-3.200000000 attaining=1 kpq_flag=[True] gap_to_second=0.112881 violations=0
+n=8 graphs=12346 alpha=0.2000 F=-2.400000000 min=-2.400000000 attaining=1 kpq_flag=[True] gap_to_second=0.095165 violations=0
+n=8 graphs=12346 alpha=0.2500 F=-2.000000000 min=-2.000000000 attaining=1 kpq_flag=[True] gap_to_second=0.084524 violations=0
+n=8 graphs=12346 alpha=0.3333 F=-1.333333333 min=-1.333333333 attaining=1 kpq_flag=[True] gap_to_second=0.063250 violations=0
+n=8 graphs=12346 alpha=0.4000 F=-0.800000000 min=-0.800000000 attaining=1 kpq_flag=[True] gap_to_second=0.042035 violations=0
+n=8 graphs=12346 alpha=0.4500 F=-0.400000000 min=-0.400000000 attaining=1 kpq_flag=[True] gap_to_second=0.022846 violations=0
+n=8 graphs=12346 alpha=0.4900 F=-0.080000000 min=-0.080000000 attaining=1 kpq_flag=[True] gap_to_second=0.004908 violations=0

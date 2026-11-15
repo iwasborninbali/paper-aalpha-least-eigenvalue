@@ -1,0 +1,18 @@
+2026-11-15 independent labelled exhaustive numeric crosscheck (n=3..6)
+n=3 alpha=0.10 labelled=8 K_copies=3 runner_copies=3 gap_to_third=0.10000000 ordering=PASS
+n=3 alpha=0.25 labelled=8 K_copies=3 runner_copies=3 gap_to_third=0.25000000 ordering=PASS
+n=3 alpha=0.40 labelled=8 K_copies=3 runner_copies=3 gap_to_third=0.20000000 ordering=PASS
+n=3 alpha=0.49 labelled=8 K_copies=3 runner_copies=3 gap_to_third=0.02000000 ordering=PASS
+n=4 alpha=0.10 labelled=64 K_copies=3 runner_copies=4 gap_to_third=0.07716416 ordering=PASS
+n=4 alpha=0.25 labelled=64 K_copies=3 runner_copies=4 gap_to_third=0.03230624 ordering=PASS
+n=4 alpha=0.40 labelled=64 K_copies=3 runner_copies=4 gap_to_third=0.00527662 ordering=PASS
+n=4 alpha=0.49 labelled=64 K_copies=3 runner_copies=4 gap_to_third=0.00005047 ordering=PASS
+n=5 alpha=0.10 labelled=1024 K_copies=10 runner_copies=60 gap_to_third=0.01540981 ordering=PASS
+n=5 alpha=0.25 labelled=1024 K_copies=10 runner_copies=60 gap_to_third=0.04937970 ordering=PASS
+n=5 alpha=0.40 labelled=1024 K_copies=10 runner_copies=60 gap_to_third=0.01120004 ordering=PASS
+n=5 alpha=0.49 labelled=1024 K_copies=10 runner_copies=60 gap_to_third=0.00015327 ordering=PASS
+n=6 alpha=0.10 labelled=32768 K_copies=10 runner_copies=15 gap_to_third=0.06702505 ordering=PASS
+n=6 alpha=0.25 labelled=32768 K_copies=10 runner_copies=15 gap_to_third=0.02989371 ordering=PASS
+n=6 alpha=0.40 labelled=32768 K_copies=10 runner_copies=15 gap_to_third=0.00547643 ordering=PASS
+n=6 alpha=0.49 labelled=32768 K_copies=10 runner_copies=15 gap_to_third=0.00005886 ordering=PASS
+PASS: 16 complete labelled-order/parameter checks; independent graph generation

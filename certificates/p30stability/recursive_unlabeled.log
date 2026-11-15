@@ -1,0 +1,28 @@
+2026-11-15 recursive non-atlas isomorphism-class generator, VF2 + LAPACK
+n=2 generated_unlabeled=2 expected_class_count=PASS
+n=3 generated_unlabeled=4 expected_class_count=PASS
+n=4 generated_unlabeled=11 expected_class_count=PASS
+n=5 generated_unlabeled=34 expected_class_count=PASS
+n=6 generated_unlabeled=156 expected_class_count=PASS
+n=7 generated_unlabeled=1044 expected_class_count=PASS
+n=3 alpha=0.10 runner_unique=PASS next_gap=0.10000000
+n=3 alpha=0.25 runner_unique=PASS next_gap=0.25000000
+n=3 alpha=0.40 runner_unique=PASS next_gap=0.20000000
+n=3 alpha=0.49 runner_unique=PASS next_gap=0.02000000
+n=4 alpha=0.10 runner_unique=PASS next_gap=0.07716416
+n=4 alpha=0.25 runner_unique=PASS next_gap=0.03230624
+n=4 alpha=0.40 runner_unique=PASS next_gap=0.00527662
+n=4 alpha=0.49 runner_unique=PASS next_gap=0.00005047
+n=5 alpha=0.10 runner_unique=PASS next_gap=0.01540981
+n=5 alpha=0.25 runner_unique=PASS next_gap=0.04937970
+n=5 alpha=0.40 runner_unique=PASS next_gap=0.01120004
+n=5 alpha=0.49 runner_unique=PASS next_gap=0.00015327
+n=6 alpha=0.10 runner_unique=PASS next_gap=0.06702505
+n=6 alpha=0.25 runner_unique=PASS next_gap=0.02989371
+n=6 alpha=0.40 runner_unique=PASS next_gap=0.00547643
+n=6 alpha=0.49 runner_unique=PASS next_gap=0.00005886
+n=7 alpha=0.10 runner_unique=PASS next_gap=0.01699353
+n=7 alpha=0.25 runner_unique=PASS next_gap=0.07514804
+n=7 alpha=0.40 runner_unique=PASS next_gap=0.03489699
+n=7 alpha=0.49 runner_unique=PASS next_gap=0.00293642
+PASS: independent generation through n=7; 20 numerical second-place checks
