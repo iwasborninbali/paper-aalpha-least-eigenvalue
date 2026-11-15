@@ -1,6 +1,6 @@
 # Independent priority audit **a** — 15 November 2026
 
-**Subject:** Minimum and second minimum of the least eigenvalue of \(A_\alpha(G)=\alpha D(G)+\(1-\alpha\)A(G)\), \(0<\alpha<1/2\); quantitative stability.  
+**Subject:** Minimum and second minimum of the least eigenvalue of \(A_\alpha(G)=\alpha D(G)+(1-\alpha)A(G)\), \(0<\alpha<1/2\); quantitative stability.  
 **Prepared independently** for the Athanor lab paper `paper-aalpha-least-eigenvalue`. No other auditor's answer was consulted.  
 **Scope/status:** Literature-discovery audit, not a certificate of novelty or an independent refereeing of every proof. Searches and access checks are as of **2026-11-15**. A negative search result is not a proof of priority. DOI/theorem/page coordinates are provided when verified; missing ones are never inferred from an abstract.
 
@@ -8,7 +8,7 @@
 
 | Claim | Decision | Basis and limitation |
 | --- | --- | --- |
-| **1. Global exact minimum \(F_n\(\alpha\)\), unique \(K_{\lfloor n/2\rfloor,\lceil n/2\rceil}\), all \(n\ge2\)** | **PARTLY PUBLISHED; odd-order global theorem NOT FOUND previously published.** | Nikiforov [N17], **Problem 30**, *AADM* **11** (2017), **p. 102**, explicitly **asks** for the \(0<\alpha<1/2\) global minimum. His **Proposition 38**, journal **p. 105** (arXiv:1607.03015 v1 **Proposition 37, p. 23**), already evaluates \(\lambda_{\min}(A_\alpha(K_{r,s}))=[\alpha n-\sqrt{\alpha^2n^2+4rs\(1-2\alpha\)}]/2\). Sharp \(\alpha=0\) result and even-order consequences occur in published literature; this does **not** by itself establish the universal odd-order minimization and uniqueness. DOI: [10.2298/AADM1701081N](https://doi.org/10.2298/AADM1701081N). |
+| **1. Global exact minimum \(F_n(\alpha)\), unique \(K_{\lfloor n/2\rfloor,\lceil n/2\rceil}\), all \(n\ge2\)** | **PARTLY PUBLISHED; odd-order global theorem NOT FOUND previously published.** | Nikiforov [N17], **Problem 30**, *AADM* **11** (2017), **p. 102**, explicitly **asks** for the \(0<\alpha<1/2\) global minimum. His **Proposition 38**, journal **p. 105** (arXiv:1607.03015 v1 **Proposition 37, p. 23**), already evaluates \(\lambda_{\min}(A_\alpha(K_{r,s}))=[\alpha n-\sqrt{\alpha^2n^2+4rs(1-2\alpha)}]/2\). Sharp \(\alpha=0\) result and even-order consequences occur in published literature; this does **not** by itself establish the universal odd-order minimization and uniqueness. DOI: [10.2298/AADM1701081N](https://doi.org/10.2298/AADM1701081N). |
 | **2. Explicit edit-distance stability** | **NOT FOUND** in the investigated literature. | The repository proves an explicit `sqrt(epsilon)+epsilon` edit bound; the checked \(A_\alpha\) sources offer degree/invariant inequalities rather than this order-(n) inverse/stability statement. No exact earlier theorem with DOI/page could be identified. This is a search-limited verdict, not proof of novelty. |
 | **3. Second distinct minimum and parity extremizers, including adjacency \(\alpha=0\)** | **PARTLY PUBLISHED** (adjacency second minimum); **\(0<\alpha<1/2\) all-(n) classification NOT FOUND**. | **G. D. Yu and Y. Z. Fan, “The least eigenvalue of graphs,” *Journal of Mathematical Research with Applications* (formerly *Journal of Mathematical Research and Exposition*) **32**(6) (2012), **659–665**, reports determining the unique graph attaining the *second* minimum of the **adjacency** least eigenvalue among all graphs of fixed order. Bibliography verified independently in 2013/2017 later papers, but the primary full text was **unavailable**: **cannot certify its exact graph, parity statement, theorem number/page, or DOI**. The proposed positive-\(\alpha\) classification is itself **only a conjecture** in the Athanor repository (except a few finite certificates). |
 
@@ -16,7 +16,7 @@
 
 Write \(p=\lfloor n/2\rfloor\), \(q=\lceil n/2\rceil\), \(\beta=1-\alpha\), \(c=1-2\alpha>0\), and
 \[
-F_n\(\alpha\)=\frac{\alpha n-\sqrt{\alpha^2n^2+4pq\(1-2\alpha\)}}{2}.
+F_n(\alpha)=\frac{\alpha n-\sqrt{\alpha^2n^2+4pq(1-2\alpha)}}{2}.
 \]
 Distinguish **(i)** the calculated spectrum of the *candidate graph*, **(ii)** optimality *among bipartite graphs*, **(iii)** optimality *among all graphs*, and **(iv)** uniqueness. An article proving only (i), or proving an \(\alpha>1/2\) inequality, is not an earlier publication of (iii)–(iv) for odd (n).
 
